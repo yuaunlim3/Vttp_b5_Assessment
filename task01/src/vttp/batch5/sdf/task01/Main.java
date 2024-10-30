@@ -15,6 +15,8 @@ import vttp.batch5.sdf.task01.models.BikeEntry;
 
 public class Main {
 
+	public static final String FORMAT = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>.There were a total of <total> cyclists. The weather was <weather>. <day> was <holiday>.";
+
 	public static void main(String[] args) {
 		try {
 			// Input file name and set reader
@@ -32,8 +34,9 @@ public class Main {
 
 			top5 = getTop5(datas);
 
-			for(int index = 0; index < 5; index++){
+			for (int index = 0; index < 5; index++) {
 				details(top5.get(index), index);
+				System.out.println(" ");
 			}
 
 		} catch (IOException ex) {
@@ -47,7 +50,7 @@ public class Main {
 		String season = Utilities.toSeason(infos.getSeason());
 		String day = Utilities.toWeekday(infos.getWeekday());
 		String month = Utilities.toMonth(infos.getMonth());
-		String holiday ="";
+		String holiday = "";
 		int total = infos.getCasual() + infos.getRegistered();
 		String weather = "";
 
@@ -96,15 +99,88 @@ public class Main {
 				break;
 		}
 
-		//check holiday
-		if(infos.isHoliday()){
+		// check holiday
+		if (infos.isHoliday()) {
 			holiday = "a holiday";
-		}else{
+		} else {
 			holiday = "not a holiday";
 		}
+		String[] sentence = FORMAT.split(" ");
 
-		System.out.printf("The %s recorded number of cyclists was in\n%s. on a %s in the month of %s.\nThere were a total of %d cyclist. The weather\nwas %s.\n%s was %s.\n",position,season,day,month,total,weather,day,holiday);
-		System.out.println("");
+		for (int idx = 0; idx < sentence.length; idx++) {
+			String word = sentence[idx];
+
+			String last = word.substring(word.length() - 1);
+			if (!last.equals(">")) {
+				word = word.substring(0, word.length() - 1);
+			}
+			switch (word) {
+				case "<position>":
+					if (last.equals(">")) {
+						sentence[idx] = position + " (position) ";
+					} else {
+						sentence[idx] = position + " (position) " + last;
+					}
+					break;
+
+				case "<season>":
+					if (last.equals(">")) {
+						sentence[idx] = season + " (season) ";
+					} else {
+						sentence[idx] = season + " (season) " + last;
+					}
+					break;
+
+				case "<day>":
+					if (last.equals(">")) {
+						sentence[idx] = day + " (day) ";
+					} else {
+						sentence[idx] = day + " (day) " + last;
+					}
+					break;
+
+				case "<month>":
+				System.out.println("Dectedd");
+					if (last.equals(">")) {
+						sentence[idx] = month + " (month) ";
+					} else {
+						sentence[idx] = month + " (month) " + last;
+					}
+					break;
+
+				case "<weather>":
+					if (last.equals(">")) {
+						sentence[idx] = weather + " (weather) ";
+					} else {
+						sentence[idx] = weather + " (weather) " + last;
+					}
+					break;
+
+				case "<total>":
+					if (last.equals(">")) {
+						sentence[idx] = total + " (total) ";
+					} else {
+						sentence[idx] = total + " (total) " + last;
+					}
+					break;
+
+				case "<holiday>":
+					if (last.equals(">")) {
+						sentence[idx] = holiday;
+					} else {
+						sentence[idx] = holiday + last;
+					}
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		for (String word : sentence) {
+			System.err.print(word + " ");
+		}
+
 	}
 
 	public static List<BikeEntry> getTop5(List<BikeEntry> datas) {
@@ -114,7 +190,8 @@ public class Main {
 		Collections.reverse(datas);
 
 		for (int idx = 0; idx < 5; idx++) {
-			//System.out.println(datas.get(idx).getCasual() + datas.get(idx).getRegistered());
+			// System.out.println(datas.get(idx).getCasual() +
+			// datas.get(idx).getRegistered());
 			top5.add(datas.get(idx));
 		}
 
