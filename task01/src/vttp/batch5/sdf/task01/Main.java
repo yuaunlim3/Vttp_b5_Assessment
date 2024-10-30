@@ -15,6 +15,8 @@ import vttp.batch5.sdf.task01.models.BikeEntry;
 
 public class Main {
 
+	public static final String FORMAT = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>. There were a total of <total> cyclists. The weather was <weather>. <day> was <holiday>." ;
+
 	public static void main(String[] args) {
 
 		try {
@@ -47,7 +49,6 @@ public class Main {
 	}
 
 	public static void details(BikeEntry infos, int index) {
-		String format = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>. There were a total of <total> cyclists. The weather was <weather>. <day> was <holiday>." ;
 		String position = "";
 		String season = Utilities.toSeason(infos.getSeason());
 		String day = Utilities.toWeekday(infos.getWeekday());
@@ -109,7 +110,7 @@ public class Main {
 		}
 
 
-		String[] sentence = format.split(" ");
+		String[] sentence = FORMAT.split(" ");
 
 		for (int idx = 0; idx < sentence.length; idx++) {
 			String word = sentence[idx];
