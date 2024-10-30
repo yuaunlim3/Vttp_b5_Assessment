@@ -15,7 +15,7 @@ import vttp.batch5.sdf.task01.models.BikeEntry;
 
 public class Main {
 
-	public static final String FORMAT = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>. There were a total of <total> cyclists. The weather was <weather>. <day> was <holiday>." ;
+	public static final String FORMAT = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>. \nThere were a total of <total> cyclists. The weather was <weather>. \n<day> was <holiday>.";
 
 	public static void main(String[] args) {
 
@@ -111,6 +111,7 @@ public class Main {
 
 
 		String[] sentence = FORMAT.split(" ");
+		System.out.println(sentence.length);
 
 		for (int idx = 0; idx < sentence.length; idx++) {
 			String word = sentence[idx];
@@ -128,77 +129,68 @@ public class Main {
 			}
 
 
-			switch (word) {
-				case "<position>":
-				//System.out.println("pos");
-					if (last.equals(">")) {
-						sentence[idx] = position + " (position)";
-					} else {
-						sentence[idx] = position + " (position)" + last;
-					}
-					break;
-
-				case "<season>":
-				//System.out.println("seasons");
-					if (last.equals(">")) {
-						sentence[idx] = season + " (season)";
-					} else {
-						sentence[idx] = season + " (season)" + last;
-					}
-					break;
-
-				case "<day>":
-				//System.out.println("day");
-					if (last.equals(">")) {
-						sentence[idx] = day + " (day)";
-					} else {
-						sentence[idx] = day + " (day)" + last;
-					}
-					break;
-
-				case "<month>":
-				//System.out.println("month");
-					if (last.equals(">")) {
-						sentence[idx] = month + " (month)";
-					} else {
-						sentence[idx] = month + " (month)" + last;
-					}
-					break;
-
-				case "<weather>":
-				//System.out.println("weather");
-					if (last.equals(">")) {
-						sentence[idx] = weather + " (weather)";
-					} else {
-						sentence[idx] = weather + " (weather)" + last;
-					}
-					break;
-
-				case "<total>":
-				//System.err.println("total");
-					if (last.equals(">")) {
-						sentence[idx] = total + " (total)";
-					} else {
-						sentence[idx] = total + " (total)" + last;
-					}
-					break;
-
-				case "<holiday>":
-				//System.out.println("holiday");
-					if (last.equals(">")) {
-						sentence[idx] = holiday;
-					} else {
-						sentence[idx] = holiday + last;
-					}
-					break;
-
-				default:
-					break;
+			if(word.contains("<position>")){
+				sentence[idx] = position + " (position)";
+				if (!last.equals(">")) {
+					sentence[idx] +=  last;
+				}if(!first.equals("<")){
+					sentence[idx] = first +sentence[idx]; 
+				}
+			}else if(word.contains("<season>")){
+				sentence[idx] = season + " (season)";
+				if (!last.equals(">")) {
+					sentence[idx] += last;
+				}if(!first.equals("<")){
+					sentence[idx] = first + sentence[idx];
+				}
+			}
+			else if(word.contains("<day>")){
+				sentence[idx] = day + " (day)";
+				if (!last.equals(">")) {
+					sentence[idx] += last;
+				}if(!first.equals("<")){
+					sentence[idx] = first + sentence[idx]; 
+				}
+			}
+			else if(word.contains("<month>")){
+				sentence[idx] = month + " (month)";
+				if (!last.equals(">")) {
+					sentence[idx] += last;
+				}if(!first.equals("<")){
+					sentence[idx] = first + sentence[idx];
+				}
+				
+			}
+			else if(word.contains("<total>")){
+				sentence[idx] = total + " (total)";
+				if (!last.equals(">")) {
+					sentence[idx] += last;
+				}if(!first.equals("<")){
+					sentence[idx] = first + sentence[idx]; 
+				}
+				
+				
+			}
+			else if(word.contains("<weather>")){
+				sentence[idx] = weather + " (weather)";
+				if (!last.equals(">")) {
+					sentence[idx] += last;
+				}if(!first.equals("<")){
+					sentence[idx] = first +sentence[idx]; 
+				}
+				
+			}
+			else if(word.contains("<holiday>")){
+				sentence[idx] = holiday;
+				if (!last.equals(">")) {
+					sentence[idx] += last;
+				} 
+				
 			}
 		}
 
-		for (String word : sentence) {
-			System.err.print(word + " ");
+		for (String words : sentence) {
+			System.out.print(words + " ");
 		}
 
 	}
