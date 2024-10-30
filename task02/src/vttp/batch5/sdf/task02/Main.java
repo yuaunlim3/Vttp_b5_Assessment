@@ -47,18 +47,18 @@ public class Main {
 			System.out.println(" ");
 
 			System.out.println("------------------------------");
-			for (int x = 0; x < board.length; x++) {
-				for (int y = 0; y < board[0].length; y++) {
-					if (board[x][y].equals(".")) {
-						board[x][y] = "X";
+			for (int y = 0; y < board.length; y++) {
+				for (int x= 0; x < board[0].length; x++) {
+					if (board[y][x].equals(".")) {
+						board[y][x] = "X";
 						int score = checkMove(board);
-						board[x][y] = ".";
-						System.out.printf("x = %d y = %d  score = %d\n",x,y,score);
+						board[y][x] = ".";
+						System.out.printf("y=%d, x=%d, utility = %d\n",y,x,score);
 					}
 				}
 			}
 		}catch(FileNotFoundException ex){
-			System.out.println("TTT file is not found");
+			System.err.println("TTT file is not found");
 		}
 
 
