@@ -111,7 +111,6 @@ public class Main {
 
 
 		String[] sentence = FORMAT.split(" ");
-		System.out.println(sentence.length);
 
 		for (int idx = 0; idx < sentence.length; idx++) {
 			String word = sentence[idx];
