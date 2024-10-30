@@ -15,12 +15,12 @@ import vttp.batch5.sdf.task01.models.BikeEntry;
 
 public class Main {
 
-	public static final String FORMAT = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>.There were a total of <total> cyclists. The weather was <weather>. <day> was <holiday>.";
+	public static final String FORMAT = "The <position> recorded number of cyclists was in <season>, on a <day> in the month of <month>. There were a total of <total> cyclists. The weather was <weather>. <day> was <holiday>.";
 
 	public static void main(String[] args) {
 		try {
 			// Input file name and set reader
-			String fileName = "task01/day.csv";
+			String fileName = "day.csv";
 			File file = new File(fileName);
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
@@ -36,6 +36,8 @@ public class Main {
 
 			for (int index = 0; index < 5; index++) {
 				details(top5.get(index), index);
+				System.out.println(" ");
+				System.out.println(" ");
 				System.out.println(" ");
 			}
 
@@ -105,6 +107,8 @@ public class Main {
 		} else {
 			holiday = "not a holiday";
 		}
+
+		
 		String[] sentence = FORMAT.split(" ");
 
 		for (int idx = 0; idx < sentence.length; idx++) {
@@ -117,50 +121,49 @@ public class Main {
 			switch (word) {
 				case "<position>":
 					if (last.equals(">")) {
-						sentence[idx] = position + " (position) ";
+						sentence[idx] = position + " (position)";
 					} else {
-						sentence[idx] = position + " (position) " + last;
+						sentence[idx] = position + " (position)" + last;
 					}
 					break;
 
 				case "<season>":
 					if (last.equals(">")) {
-						sentence[idx] = season + " (season) ";
+						sentence[idx] = season + " (season)";
 					} else {
-						sentence[idx] = season + " (season) " + last;
+						sentence[idx] = season + " (season)" + last;
 					}
 					break;
 
 				case "<day>":
 					if (last.equals(">")) {
-						sentence[idx] = day + " (day) ";
+						sentence[idx] = day + " (day)";
 					} else {
-						sentence[idx] = day + " (day) " + last;
+						sentence[idx] = day + " (day)" + last;
 					}
 					break;
 
 				case "<month>":
-				System.out.println("Dectedd");
 					if (last.equals(">")) {
-						sentence[idx] = month + " (month) ";
+						sentence[idx] = month + " (month)";
 					} else {
-						sentence[idx] = month + " (month) " + last;
+						sentence[idx] = month + " (month)" + last;
 					}
 					break;
 
 				case "<weather>":
 					if (last.equals(">")) {
-						sentence[idx] = weather + " (weather) ";
+						sentence[idx] = weather + " (weather)";
 					} else {
-						sentence[idx] = weather + " (weather) " + last;
+						sentence[idx] = weather + " (weather)" + last;
 					}
 					break;
 
 				case "<total>":
 					if (last.equals(">")) {
-						sentence[idx] = total + " (total) ";
+						sentence[idx] = total + " (total)";
 					} else {
-						sentence[idx] = total + " (total) " + last;
+						sentence[idx] = total + " (total)" + last;
 					}
 					break;
 
